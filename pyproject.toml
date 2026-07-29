@@ -1,5 +1,5 @@
 [tool.poetry]
-name = "ml-customer-analytics"
+name = "customer-analytics"
 version = "1.0.0"
 description = "Customer churn prediction, RFM segmentation, and CLV estimation with XGBoost and SHAP explainability."
 authors = ["Mahesh Solanki <maheshsinh1910@gmail.com>"]
