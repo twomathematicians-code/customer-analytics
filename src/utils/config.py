@@ -1,16 +1,10 @@
-from pydantic import Field
-from pydantic_settings import BaseSettings, SettingsConfigDict
+from pydantic_settings import BaseSettings
 from functools import lru_cache
 
 class Settings(BaseSettings):
-    model_config = SettingsConfigDict(env_file=".env")
-    environment: str = "development"
-    log_level: str = "INFO"
-    mlflow_tracking_uri: str = "http://localhost:5000"
-
-    @property
-    def database_url(self) -> str:
-        return "postgresql+asyncpg://mluser:mlpassword@localhost:5432/ml_db"
+    database_url: str = "postgresql+asyncpg://cust:cust123@localhost:5432/customer_db"
+    churn_threshold: float = 0.4
+    rfm_quantiles: list = [0.25, 0.5, 0.75]
 
 @lru_cache
 def get_settings() -> Settings:

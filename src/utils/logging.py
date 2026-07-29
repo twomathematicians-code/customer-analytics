@@ -1,11 +1,8 @@
-import logging, sys
-
-def setup_logging(level: str = "INFO") -> None:
-    logging.basicConfig(
-        level=getattr(logging, level),
-        format="%(asctime)s | %(levelname)-8s | %(name)s | %(message)s",
-        handlers=[logging.StreamHandler(sys.stdout)]
-    )
-
-def get_logger(name: str) -> logging.Logger:
-    return logging.getLogger(name)
+import logging
+def get_logger(name: str = "customer-analytics") -> logging.Logger:
+    logger = logging.getLogger(name)
+    if not logger.handlers:
+        h = logging.StreamHandler()
+        h.setFormatter(logging.Formatter("%(levelname)s | %(name)s | %(message)s"))
+        logger.addHandler(h)
+    return logger

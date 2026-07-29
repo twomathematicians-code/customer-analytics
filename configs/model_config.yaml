@@ -1,5 +1,34 @@
+# Customer Analytics Config
+churn:
+  feature_columns:
+    - tenure_months
+    - monthly_charges
+    - contract_type
+    - payment_method
+    - internet_service
+    - num_tickets
+  threshold: 0.4
+  risk_tiers:
+    critical: 0.7
+    high: 0.4
+    medium: 0.2
+
+rfm:
+  quantiles: [0.25, 0.5, 0.75]
+  segment_labels:
+    - Champions
+    - Loyal Customers
+    - Potential Loyalists
+    - At Risk
+    - Hibernating
+    - Lost
+
+clv:
+  prediction_months: 12
+  discount_rate: 0.01
+
 model:
-  random_state: 42
-  test_size: 0.2
+  xgboost_max_depth: 5
+  xgboost_n_estimators: 150
   cv_folds: 5
-  threshold: 0.5
+  random_state: 42

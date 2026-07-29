@@ -1,45 +1,79 @@
-# 👥 ML Customer Analytics
+# 👥 Customer Analytics Platform
 
-[![CI/CD](https://github.com/twomathematicians-code/ml-customer-analytics/actions/workflows/ci.yml/badge.svg)](https://github.com/twomathematicians-code/ml-customer-analytics/actions)
-[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker)](https://hub.docker.com/)
-[![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-blue)](https://www.python.org/)
+> Churn Prediction · RFM Segmentation · CLV Estimation · SHAP Explainability
 
-**End-to-end customer analytics pipeline: churn prediction, RFM segmentation, customer lifetime value, and explainable AI with SHAP — built for marketing & retention teams.**
-
----
-
-## 🎯 Analytics Modules
-
-| Module | Algorithm | Output |
-|---|---|---|
-| **Churn Prediction** | XGBoost + SHAP | Risk score + feature drivers |
-| **Customer Segmentation** | K-Means + RFM Analysis | 5-tier segmentation |
-| **Lifetime Value (CLV)** | BG/NBD + Gamma-Gamma | 12-month CLV projection |
-| **Cohort Analysis** | Retention curves | Monthly cohort heatmaps |
-
----
-
-## 🚀 Quick Start
-
-```bash
-git clone https://github.com/twomathematicians-code/ml-customer-analytics.git
-cd ml-customer-analytics
-docker-compose up --build
+```
+pip install -e ".[dev]"
+docker compose up -d
+pytest tests/
 ```
 
 ---
 
-## 🔌 API Endpoints
+## What It Does
 
-| Method | Endpoint | Description |
-|---|---|---|
-| `POST` | `/api/v1/analyze/churn` | Churn risk prediction |
-| `POST` | `/api/v1/analyze/segment` | Customer segmentation |
-| `POST` | `/api/v1/analyze/clv` | Lifetime value prediction |
-| `GET` | `/api/v1/health` | Health check |
+| Capabilities | Model | Output |
+|:--|:--|:--|
+| Churn Risk Scoring | XGBoost + SHAP | Probability + reason codes |
+| RFM Segmentation | Quantile-based RFM | Tier labels (Champions, At Risk...) |
+| Customer Lifetime Value | BG/NBD + Gamma-Gamma | 12-month monetary projection |
+| Cohort Analysis | Retention curves | Monthly heatmaps |
+
+## Running
+
+```bash
+# Full stack
+docker compose up --build
+
+# Predict churn for a customer
+curl -X POST http://localhost:8000/api/v1/analyze/churn -H "Content-Type: application/json" -d '{
+  "customer_id": "C-12345",
+  "tenure_months": 8,
+  "monthly_charges": 85.50,
+  "total_charges": 684.00,
+  "contract_type": "month-to-month",
+  "payment_method": "electronic_check",
+  "internet_service": "Fiber_optic",
+  "gender": "Male",
+  "senior_citizen": 0,
+  "partner": "No",
+  "dependents": "No",
+  "online_security": "No_internet",
+  "tech_support": "No_internet",
+  "paperless_billing": "Yes",
+  "num_tickets": 4
+}'
+```
+
+## Endpoints
+
+- `POST /api/v1/analyze/churn` — Single customer churn prediction
+- `GET  /api/v1/analyze/segments` — Segment-level analytics
+- `POST /api/v1/analyze/rfm` — RFM scoring for a customer
+- `GET  /api/v1/health` — Health check
+
+## Project Structure
+
+```
+├── src/
+│   ├── api/main.py          # FastAPI endpoints
+│   ├── models/train.py      # XGBoost churn model + SHAP
+│   ├── utils/config.py      # App settings
+│   └── utils/logging.py     # Structured logging
+├── tests/test_api.py        # Integration tests
+├── configs/model_config.yaml
+├── pyproject.toml
+├── Dockerfile
+└── docker-compose.yml
+```
+
+## Stack
+
+Python 3.11 · FastAPI · XGBoost · LightGBM · SHAP · pandas · PostgreSQL · Docker
 
 ---
 
-## 👤 Author
-
-**Mahesh Solanki** — [LinkedIn](https://linkedin.com/in/maheshsolanki-16b9a6a5) | [GitHub](https://github.com/twomathematicians-code)
+<p align="center">
+  <a href="https://linkedin.com/in/maheshsolanki-16b9a6a5">Mahesh Solanki</a> ·
+  <a href="https://github.com/twomathematicians-code">GitHub</a>
+</p>
