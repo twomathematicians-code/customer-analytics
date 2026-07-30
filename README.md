@@ -1,5 +1,12 @@
 # 👥 Customer Analytics Platform
 
+[![CI](https://github.com/twomathematicians-code/customer-analytics/actions/workflows/ci.yml/badge.svg)](https://github.com/twomathematicians-code/customer-analytics/actions)
+[![Python 3.11+](https://img.shields.io/badge/Python-3.11%2B-blue?logo=python)](https://www.python.org/)
+[![XGBoost](https://img.shields.io/badge/XGBoost-2.0-06b6d4?logo=xgboost)](https://xgboost.readthedocs.io/)
+[![FastAPI](https://img.shields.io/badge/FastAPI-0.111-009688?logo=fastapi)](https://fastapi.tiangolo.com/)
+[![Docker](https://img.shields.io/badge/Docker-Ready-2496ED?logo=docker)](https://hub.docker.com/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
+
 > Churn Prediction · RFM Segmentation · CLV Estimation · SHAP Explainability
 
 ```
