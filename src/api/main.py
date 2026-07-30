@@ -76,3 +76,4 @@ async def rfm_score(customer_id: str = Query(...)):
 
 @app.get("/api/v1/health", tags=["⚙️ System"])
 async def health(): return {"status":"healthy","model":"churn-v2"}
+// YOLO test
